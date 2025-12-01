@@ -1,0 +1,13 @@
+<project>
+    ...
+    <build>
+        ...
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <url>http://65.1.1.171:8081/repository/anil-Snapshot/</url>
+        </repository>
+    </distributionManagement>
+</project>
