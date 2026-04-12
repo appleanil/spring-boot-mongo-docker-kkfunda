@@ -1,5 +1,9 @@
-kind: ConfigMap
+# or else we can drop our code yaml file also
+
+
+
 apiVersion: v1
+kind: ConfigMap
 metadata:
   name: springappconfigmap
 data:
@@ -60,7 +64,7 @@ spec:
     spec:
       containers:
       - name: springappcontainer
-        image: <pls give your image location>
+        image: kkeducation12345/spring-app:1.0.0
         ports:
         - containerPort: 8080
         env:
@@ -75,7 +79,7 @@ spec:
               name: springappsecrets
               key: password
         - name: MONGO_DB_HOSTNAME
-          value: mongo
+          value: mongo-svc       # should be same name in deployment and mongo service yaml file
 ---
 apiVersion: v1
 kind: Service
@@ -109,8 +113,8 @@ spec:
          persistentVolumeClaim:
            claimName: pvc-hostpath
        containers:
-       - name: mongodbcontainer
-         image: mongo
+       - name: mongodb-container
+         image: mongo:8.0.9-noble
          ports:
          - containerPort: 27017
          env:
@@ -131,7 +135,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo
+  name: mongo-svc
 spec:
   type: ClusterIP
   selector:
